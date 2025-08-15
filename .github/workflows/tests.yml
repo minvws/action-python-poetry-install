@@ -1,0 +1,50 @@
+name: action-test
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/tests.yml
+      - action.yml
+      - __tests__/data/*
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/tests.yml
+      - action.yml
+      - __tests__/data/*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  test-install-action:
+    name: Test install action (Python ${{ matrix.python-version}}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          [
+            ubuntu-latest,
+            ubuntu-24.04,
+            ubuntu-22.04,
+          ]
+        python-version:
+          [
+            '3.9',
+            '3.10',
+            '3.11',
+            '3.12',
+            '3.13'
+          ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy pyproject.toml
+        run: mv ./__tests__/data/pyproject.toml .
+      - name: Setup Python, Poetry and install dependencies
+        uses: ./
+        with:
+          python_version: ${{ matrix.python-version }}
