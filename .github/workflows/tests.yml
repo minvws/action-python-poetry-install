@@ -41,7 +41,7 @@ jobs:
             '3.13'
           ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Copy pyproject.toml
         run: mv ./__tests__/data/pyproject.toml .
       - name: Setup Python, Poetry and install dependencies
