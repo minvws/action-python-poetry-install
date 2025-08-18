@@ -19,27 +19,14 @@ permissions:
   contents: read
 
 jobs:
-
   test-install-action:
     name: Test install action (Python ${{ matrix.python-version}}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os:
-          [
-            ubuntu-latest,
-            ubuntu-24.04,
-            ubuntu-22.04,
-          ]
-        python-version:
-          [
-            '3.9',
-            '3.10',
-            '3.11',
-            '3.12',
-            '3.13'
-          ]
+        os: [ubuntu-latest, ubuntu-24.04, ubuntu-22.04]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v5
       - name: Copy pyproject.toml

@@ -10,23 +10,23 @@ To use the action, add it to a workflow in your repository:
 name: Build Python project
 
 on:
-    workflow_dispatch:
-    pull_request:
-    push:
-        branches:
-            - main
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
-    build-python:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+  build-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Install Python and dependencies
-              uses: minvws/action-python-poetry-install@v1
-              with:
-                  python_version: <python_version>
+      - name: Install Python and dependencies
+        uses: minvws/action-python-poetry-install@v1
+        with:
+          python_version: <python_version>
 ```
 
 Replace `<python_version>` with the Python version your project needs.
